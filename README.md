@@ -1,6 +1,6 @@
 # GridMaker
 
-A grid data make tool. Using [Gosu][] and [Ruby][].
+A grid data making tool. Using [Gosu][] and [Ruby][].
 
 [Gosu]: http://www.libgosu.org/
 [Ruby]: https://www.ruby-lang.org/
