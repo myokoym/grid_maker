@@ -39,10 +39,6 @@ Or install it yourself as:
 
     $ grid_pattern_editor
 
-### Examples
-
-See examples/ directory.
-
 ## License
 
 MIT License. See LICENSE.txt for details.
