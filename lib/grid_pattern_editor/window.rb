@@ -2,6 +2,7 @@ require "gosu"
 require "grid_pattern_editor/base"
 require "grid_pattern_editor/z_order"
 require "grid_pattern_editor/board"
+require "grid_pattern_editor/control_panel"
 
 module GridPatternEditor
   class Window < Gosu::Window
@@ -18,7 +19,12 @@ module GridPatternEditor
       description = file_name || "not set a file"
       self.caption = "Grid Pattern Editor - #{description}"
       init_images
-      @board = Board.new(self, width, height)
+      board_width = width * 0.8
+      control_panel_width = width * 0.2
+      @board = Board.new(self, board_width, height)
+      @control_panel = ControlPanel.new(self,
+                                        board_width, 0,
+                                        control_panel_width, height)
       @file_name = file_name
     end
 
@@ -27,11 +33,16 @@ module GridPatternEditor
 
     def draw
       @board.draw
+      @control_panel.draw
     end
 
     def button_down(id)
       case id
       when Gosu::MsLeft
+        clicked_cell = @control_panel.click
+        if clicked_cell
+          clicked_cell.run
+        end
         clicked_cell = @board.click
         return unless clicked_cell
         index = TEXTS.index(clicked_cell.text)
@@ -49,6 +60,18 @@ module GridPatternEditor
 
     def needs_cursor?
       true
+    end
+
+    def write_data
+      if @file_name.nil?
+        puts(@board.to_s)
+      elsif File.exist?(@file_name)
+        File.open(@file_name, "w") do |file|
+          file.puts(@board.to_s)
+        end
+      else
+        $stderr.puts("Warning: don't exist the file: #{@file_name}")
+      end
     end
 
     private
@@ -69,18 +92,6 @@ module GridPatternEditor
     def media_dir
       base_dir = File.expand_path(File.join(__FILE__, "..", "..", ".."))
       File.join(base_dir, "media")
-    end
-
-    def write_data
-      if @file_name.nil?
-        puts(@board.to_s)
-      elsif File.exist?(@file_name)
-        File.open(@file_name, "w") do |file|
-          file.puts(@board.to_s)
-        end
-      else
-        $stderr.puts("Warning: don't exist the file: #{@file_name}")
-      end
     end
   end
 end
