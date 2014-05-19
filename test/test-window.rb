@@ -13,4 +13,8 @@ class WindowTest < Test::Unit::TestCase
     window = GridPatternEditor::Window.new("grid_pattern.txt")
     assert_not_nil(window)
   end
+
+  def test_caption
+    assert_equal("GridPatternEditor - not set a file", @window.caption)
+  end
 end
