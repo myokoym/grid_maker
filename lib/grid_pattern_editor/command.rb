@@ -1,6 +1,6 @@
-require "grid_maker/window"
+require "grid_pattern_editor/window"
 
-module GridMaker
+module GridPatternEditor
   class Command
     class << self
       def run

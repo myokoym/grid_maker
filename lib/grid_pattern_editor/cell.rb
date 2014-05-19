@@ -1,8 +1,8 @@
 require "gosu"
-require "grid_maker/base"
-require "grid_maker/z_order"
+require "grid_pattern_editor/base"
+require "grid_pattern_editor/z_order"
 
-module GridMaker
+module GridPatternEditor
   class Cell
     include Base
 

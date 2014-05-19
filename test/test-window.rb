@@ -1,8 +1,8 @@
-require "grid_maker"
+require "grid_pattern_editor"
 
 class WindowTest < Test::Unit::TestCase
   def setup
-    @window = GridMaker::Window.new
+    @window = GridPatternEditor::Window.new
   end
 
   def test_init

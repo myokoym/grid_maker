@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require "grid_pattern_editor/command"
+
+GridPatternEditor::Command.run

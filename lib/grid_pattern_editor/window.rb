@@ -1,9 +1,9 @@
 require "gosu"
-require "grid_maker/base"
-require "grid_maker/z_order"
-require "grid_maker/board"
+require "grid_pattern_editor/base"
+require "grid_pattern_editor/z_order"
+require "grid_pattern_editor/board"
 
-module GridMaker
+module GridPatternEditor
   class Window < Gosu::Window
     TEXTS = [
       "0",
@@ -15,7 +15,7 @@ module GridMaker
 
     def initialize(width=800, height=600)
       super(width, height, false)
-      self.caption = "GridMaker"
+      self.caption = "GridPatternEditor"
       init_images
       @board = Board.new(self, width, height)
     end

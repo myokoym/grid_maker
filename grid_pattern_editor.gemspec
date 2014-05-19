@@ -1,15 +1,15 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'grid_maker/version'
+require 'grid_pattern_editor/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "grid_maker"
-  spec.version       = GridMaker::VERSION
+  spec.name          = "grid_pattern_editor"
+  spec.version       = GridPatternEditor::VERSION
   spec.authors       = ["Masafumi Yokoyama"]
   spec.email         = ["myokoym@gmail.com"]
   spec.summary       = %q{A grid data make tool}
-  spec.homepage      = "https://github.com/myokoym/grid_maker"
+  spec.homepage      = "https://github.com/myokoym/grid_pattern_editor"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")

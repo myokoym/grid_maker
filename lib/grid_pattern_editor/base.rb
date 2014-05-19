@@ -1,4 +1,4 @@
-module GridMaker
+module GridPatternEditor
   module Base
     def draw_square(window, x1, y1, x2, y2, color, z_order=0)
       window.draw_quad(x1, y1, color,
