@@ -78,7 +78,7 @@ module GridPatternEditor
           file.puts(@board.to_s)
         end
       else
-        $stderr.puts("Warning: don't exists the file: #{@file_name}")
+        $stderr.puts("Warning: don't exist the file: #{@file_name}")
       end
     end
   end
