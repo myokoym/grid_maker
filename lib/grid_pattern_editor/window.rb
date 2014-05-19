@@ -16,7 +16,7 @@ module GridPatternEditor
     def initialize(file_name=nil, width=800, height=600)
       super(width, height, false)
       description = file_name || "not set a file"
-      self.caption = "GridPatternEditor - #{description}"
+      self.caption = "Grid Pattern Editor - #{description}"
       init_images
       @board = Board.new(self, width, height)
       @file_name = file_name
