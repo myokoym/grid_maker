@@ -2,4 +2,4 @@
 
 require "grid_pattern_editor/command"
 
-GridPatternEditor::Command.run
+GridPatternEditor::Command.run(*ARGV)

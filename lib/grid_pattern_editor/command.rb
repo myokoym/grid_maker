@@ -3,8 +3,8 @@ require "grid_pattern_editor/window"
 module GridPatternEditor
   class Command
     class << self
-      def run
-        window = Window.new
+      def run(*arguments)
+        window = Window.new(arguments[0])
         window.show
       end
     end
