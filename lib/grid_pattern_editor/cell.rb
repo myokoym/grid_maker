@@ -70,7 +70,6 @@ module GridPatternEditor
       x = @x1
       y = @y1
       z = ZOrder::Image
-      color = Gosu::Color::BLACK
       @image.draw(x, y, z,
                   @image_factor_x, @image_factor_y)
     end
