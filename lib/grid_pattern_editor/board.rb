@@ -15,6 +15,8 @@ module GridPatternEditor
       @height = height
       @cells = []
       @cell_hash = {}
+      @n_columns = @window.n_columns
+      @n_rows = @window.n_rows
       create_cells
     end
 
@@ -42,8 +44,8 @@ module GridPatternEditor
     end
 
     def to_s
-      lines = 0.upto(@num_of_row - 1).collect do |y|
-        line = 0.upto(@num_of_column - 1).collect do |x|
+      lines = 0.upto(@n_rows - 1).collect do |y|
+        line = 0.upto(@n_columns - 1).collect do |x|
           @cell_hash["#{y}#{x}"].text
         end
         line.join
@@ -61,14 +63,12 @@ module GridPatternEditor
     end
 
     def create_cells
-      width = 29
-      height = 29
+      width = @width * 0.98 / @n_columns
+      height = @height * 0.98 / @n_rows
       x_margin = @width % width
       y_margin = @height % height
-      @num_of_column = (@width - x_margin) / width
-      @num_of_row = (@height - y_margin) / height
-      0.upto(@num_of_row - 1) do |y|
-        0.upto(@num_of_column - 1) do |x|
+      0.upto(@n_rows - 1) do |y|
+        0.upto(@n_columns - 1) do |x|
           cell = Cell.new(@window,
                           x, y,
                           width, height,

@@ -35,8 +35,8 @@ module GridPatternEditor
       @text = text
       @image = @window.images[@text]
       return unless @image
-      @image_factor_x = 0.8 * @image.width / @width
-      @image_factor_y = 0.8 * @image.height / @height
+      @image_factor_x = @width.to_f / @image.width
+      @image_factor_y = @height.to_f / @image.height
     end
 
     def remove
