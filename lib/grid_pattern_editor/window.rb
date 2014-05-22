@@ -15,8 +15,11 @@ module GridPatternEditor
     attr_reader :images, :texts
     attr_reader :n_columns, :n_rows
 
-    def initialize(file_name=nil, width=800, height=600,
-                   n_columns=24, n_rows=32)
+    def initialize(file_name=nil, options={})
+      width     = options[:width]   || 800
+      height    = options[:height]  || 600
+      n_columns = options[:columns] || 24
+      n_rows    = options[:rows]    || 32
       super(width, height, false)
       description = file_name || "not set a file"
       self.caption = "Grid Pattern Editor - #{description}"
