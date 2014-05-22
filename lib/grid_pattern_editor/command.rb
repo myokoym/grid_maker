@@ -21,22 +21,27 @@ Usage: grid_pattern_editor [FILE_PATH]
         options = {}
 
         parser = OptionParser.new
+
         parser.on("-w", "--width=WIDTH",
                   Integer) do |integer|
           options[:width] = integer
         end
+
         parser.on("-h", "--height=HEIGHT",
                   Integer) do |integer|
           options[:columns] = integer
         end
+
         parser.on("--columns=NUMBER_OF_COLUMUNS",
                   Integer) do |integer|
           options[:columns] = integer
         end
+
         parser.on("--rows=NUMBER_OF_ROWS",
                   Integer) do |integer|
           options[:rows] = integer
         end
+
         parser.parse!(arguments)
 
         options
