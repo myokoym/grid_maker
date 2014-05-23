@@ -35,9 +35,11 @@ Or install it yourself as:
 
 ## Usage
 
-### Demo
+    $ grid_pattern_editor [FILE_PATH] [OPTIONS]...
 
-    $ grid_pattern_editor
+### Show help message
+
+    $ grid_pattern_editor --help
 
 ## License
 
