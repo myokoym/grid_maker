@@ -29,7 +29,7 @@ Usage: grid_pattern_editor [FILE_PATH]
 
         parser.on("-h", "--height=HEIGHT",
                   Integer) do |integer|
-          options[:columns] = integer
+          options[:height] = integer
         end
 
         parser.on("--columns=NUMBER_OF_COLUMUNS",
