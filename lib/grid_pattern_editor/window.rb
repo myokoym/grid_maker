@@ -74,9 +74,9 @@ module GridPatternEditor
         puts(@board.to_s)
       else
         begin
-        File.open(@file_name, "w") do |file|
-          file.puts(@board.to_s)
-        end
+          File.open(@file_name, "w") do |file|
+            file.puts(@board.to_s)
+          end
         rescue
           $stderr.puts("Warning: can't save file: #{@file_name}")
         end
