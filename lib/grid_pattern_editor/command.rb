@@ -3,6 +3,8 @@ require "grid_pattern_editor/window"
 
 module GridPatternEditor
   class Command
+    USAGE = "Usage: grid_pattern_editor [FILE_PATH] [OPTIONS]..."
+
     class << self
       def run(*arguments)
         options = parse_option(arguments)
@@ -10,7 +12,7 @@ module GridPatternEditor
         unless file_path
           $stderr.puts(<<-END_OF_MESSAGE)
 Warning: not set an export/import file.
-Usage: grid_pattern_editor [FILE_PATH]
+#{USAGE}
           END_OF_MESSAGE
         end
         window = Window.new(file_path, options)
@@ -22,7 +24,7 @@ Usage: grid_pattern_editor [FILE_PATH]
 
         parser = OptionParser.new
 
-        parser.banner = "grid_pattern_editor [FILE_PATH] [OPTION]..."
+        parser.banner = USAGE
 
         parser.on("-w", "--width=WIDTH",
                   Integer,
