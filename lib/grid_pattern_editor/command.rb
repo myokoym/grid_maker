@@ -22,23 +22,29 @@ Usage: grid_pattern_editor [FILE_PATH]
 
         parser = OptionParser.new
 
+        parser.banner = "grid_pattern_editor [FILE_PATH] [OPTION]..."
+
         parser.on("-w", "--width=WIDTH",
-                  Integer) do |width|
+                  Integer,
+                  "Window width size (px)") do |width|
           options[:width] = width
         end
 
         parser.on("-h", "--height=HEIGHT",
-                  Integer) do |height|
+                  Integer,
+                  "Window height size (px)") do |height|
           options[:height] = height
         end
 
-        parser.on("--columns=NUMBER_OF_COLUMUNS",
-                  Integer) do |columns|
+        parser.on("--columns=COLUMUNS",
+                  Integer,
+                  "Number of columns") do |columns|
           options[:columns] = columns
         end
 
-        parser.on("--rows=NUMBER_OF_ROWS",
-                  Integer) do |rows|
+        parser.on("--rows=ROWS",
+                  Integer,
+                  "Number of rows") do |rows|
           options[:rows] = rows
         end
 
