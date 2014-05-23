@@ -6,14 +6,14 @@ module GridPatternEditor
     class << self
       def run(*arguments)
         options = parse_option(arguments)
-        file_name = arguments[0]
-        unless file_name
+        file_path = arguments[0]
+        unless file_path
           $stderr.puts(<<-END_OF_MESSAGE)
 Warning: not set an export/import file.
 Usage: grid_pattern_editor [FILE_PATH]
           END_OF_MESSAGE
         end
-        window = Window.new(file_name, options)
+        window = Window.new(file_path, options)
         window.show
       end
 

@@ -15,13 +15,13 @@ module GridPatternEditor
     attr_reader :images, :texts
     attr_reader :n_columns, :n_rows
 
-    def initialize(file_name=nil, options={})
+    def initialize(file_path=nil, options={})
       width     = options[:width]   || 800
       height    = options[:height]  || 600
       n_columns = options[:columns] || 24
       n_rows    = options[:rows]    || 32
       super(width, height, false)
-      description = file_name || "not set a file"
+      description = file_path || "not set a file"
       self.caption = "Grid Pattern Editor - #{description}"
       init_images
       board_width = width * 0.8
@@ -32,7 +32,7 @@ module GridPatternEditor
       @control_panel = ControlPanel.new(self,
                                         board_width, 0,
                                         control_panel_width, height)
-      @file_name = file_name
+      @file_path = file_path
     end
 
     def update
@@ -70,15 +70,15 @@ module GridPatternEditor
     end
 
     def write_data
-      if @file_name.nil?
+      if @file_path.nil?
         puts(@board.to_s)
       else
         begin
-          File.open(@file_name, "w") do |file|
+          File.open(@file_path, "w") do |file|
             file.puts(@board.to_s)
           end
         rescue
-          $stderr.puts("Warning: can't save file: #{@file_name}")
+          $stderr.puts("Warning: can't save file: #{@file_path}")
         end
       end
     end
