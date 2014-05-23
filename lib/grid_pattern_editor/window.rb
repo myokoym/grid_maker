@@ -72,12 +72,14 @@ module GridPatternEditor
     def write_data
       if @file_name.nil?
         puts(@board.to_s)
-      elsif File.exist?(@file_name)
+      else
+        begin
         File.open(@file_name, "w") do |file|
           file.puts(@board.to_s)
         end
-      else
-        $stderr.puts("Warning: don't exist the file: #{@file_name}")
+        rescue
+          $stderr.puts("Warning: can't save file: #{@file_name}")
+        end
       end
     end
 
