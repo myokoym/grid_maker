@@ -15,7 +15,8 @@ module GridPatternEditor
                    x, y,
                    width, height,
                    x_margin=0,
-                   y_margin=0)
+                   y_margin=0,
+                   text=nil)
       @window = window
       @x = x
       @y = y
@@ -25,9 +26,10 @@ module GridPatternEditor
       @y1 = y_margin + @y * @height
       @x2 = @x1 + @width
       @y2 = @y1 + @height
+      @text = text || DEFAULT_TEXT
       @frame_color = Gosu::Color::BLACK
       @background_color = Gosu::Color::WHITE
-      set_image_from_text(DEFAULT_TEXT)
+      set_image_from_text(@text)
     end
 
     def set_image_from_text(text)

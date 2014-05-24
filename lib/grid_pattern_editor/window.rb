@@ -26,13 +26,13 @@ module GridPatternEditor
       init_images
       board_width = width * 0.8
       control_panel_width = width * 0.2
+      @file_path = file_path
       @n_columns = n_columns
       @n_rows = n_rows
-      @board = Board.new(self, board_width, height)
+      @board = Board.new(self, board_width, height, file_path)
       @control_panel = ControlPanel.new(self,
                                         board_width, 0,
                                         control_panel_width, height)
-      @file_path = file_path
     end
 
     def update
@@ -81,6 +81,22 @@ module GridPatternEditor
           $stderr.puts("Warning: can't save file: #{@file_path}")
         end
       end
+    end
+
+    def read_data
+      data = []
+      if @file_path && File.exist?(@file_path)
+        begin
+          File.open(@file_path) do |file|
+            file.each_line do |line|
+              data << line.split(//)
+            end
+          end
+        rescue
+          $stderr.puts("Warning: can't load file: #{@file_path}")
+        end
+      end
+      data
     end
 
     private

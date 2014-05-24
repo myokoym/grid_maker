@@ -9,7 +9,7 @@ module GridPatternEditor
 
     attr_reader :cell_hash
 
-    def initialize(window, width, height)
+    def initialize(window, width, height, file_path=nil)
       @window = window
       @width = width
       @height = height
@@ -17,6 +17,7 @@ module GridPatternEditor
       @cell_hash = {}
       @n_columns = @window.n_columns
       @n_rows = @window.n_rows
+      @file_path = file_path
       create_cells
     end
 
@@ -67,13 +68,16 @@ module GridPatternEditor
       height = @height * 0.98 / @n_rows
       x_margin = @width % width
       y_margin = @height % height
+      data = @window.read_data
       0.upto(@n_rows - 1) do |y|
         0.upto(@n_columns - 1) do |x|
+          text = data[y] ? data[y][x] : nil
           cell = Cell.new(@window,
                           x, y,
                           width, height,
                           x_margin / 2,
-                          y_margin / 2)
+                          y_margin / 2,
+                          text)
           @cells << cell
           @cell_hash["#{y}#{x}"] = cell
         end
