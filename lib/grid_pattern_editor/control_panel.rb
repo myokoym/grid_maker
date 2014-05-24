@@ -15,13 +15,15 @@ module GridPatternEditor
       @width = width
       @height = height
       @cells = []
-      @font = Gosu::Font.new(@window, Gosu.default_font_name, @height / 12)
+      @font_size = @height / 12
+      @font = Gosu::Font.new(@window, Gosu.default_font_name, @font_size)
       create_cells
     end
 
     def draw
       draw_background
       draw_size_info
+      draw_text_of_image
       @cells.each do |cell|
         cell.draw
       end
@@ -49,6 +51,22 @@ module GridPatternEditor
       @font.draw("#{@window.n_columns} * #{@window.n_rows}",
                  @x * 1.0, @y * 1.0, ZOrder::Image,
                  1.0, 1.0, Gosu::Color::BLACK)
+    end
+
+    def draw_text_of_image
+      x = @x + @font_size * 0.1
+      y = @y + @font_size * 6
+      @window.images.each_with_index do |entry, i|
+        text, image = *entry
+        image.draw(x,
+                   y + @font_size * (i + 1),
+                   ZOrder::Image)
+        @font.draw(": #{text}",
+                   x + @font_size,
+                   y + @font_size * (i + 1),
+                   ZOrder::Image,
+                   1.0, 1.0, Gosu::Color::BLACK)
+      end
     end
 
     def create_cells
