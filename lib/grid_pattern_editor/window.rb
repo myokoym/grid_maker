@@ -66,7 +66,7 @@ module GridPatternEditor
         index %= TEXTS.size
         clicked_cell.set_image_from_text(TEXTS[index])
       when Gosu::KbEnter, Gosu::KbReturn
-        write_data
+        puts(@board.to_s)
       when Gosu::KbR
         @board.reset
       when Gosu::KbEscape
