@@ -43,6 +43,7 @@ module GridPatternEditor
 
       def run
         @window.write_data
+        @window.message = Message.new(@window, "saved")
       end
 
       def draw

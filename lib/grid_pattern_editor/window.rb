@@ -3,6 +3,7 @@ require "grid_pattern_editor/base"
 require "grid_pattern_editor/z_order"
 require "grid_pattern_editor/board"
 require "grid_pattern_editor/control_panel"
+require "grid_pattern_editor/message"
 
 module GridPatternEditor
   class Window < Gosu::Window
@@ -14,6 +15,8 @@ module GridPatternEditor
 
     attr_reader :images, :texts
     attr_reader :n_columns, :n_rows
+
+    attr_writer :message
 
     def initialize(file_path=nil, options={})
       width     = options[:width]   || 800
@@ -33,14 +36,20 @@ module GridPatternEditor
       @control_panel = ControlPanel.new(self,
                                         board_width, 0,
                                         control_panel_width, height)
+      @message = nil
     end
 
     def update
+      if @message
+        @message.update
+        @message = nil if @message.limit && @message.limit < 0
+      end
     end
 
     def draw
       @board.draw
       @control_panel.draw
+      @message.draw if @message
     end
 
     def button_down(id)
