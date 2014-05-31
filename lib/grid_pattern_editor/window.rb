@@ -16,8 +16,6 @@ module GridPatternEditor
     attr_reader :images, :texts
     attr_reader :n_columns, :n_rows
 
-    attr_writer :message
-
     def initialize(file_path=nil, options={})
       width     = options[:width]   || 800
       height    = options[:height]  || 600
@@ -96,6 +94,7 @@ module GridPatternEditor
         rescue
           $stderr.puts("Warning: can't save file: #{@file_path}")
         end
+        @message = Message.new(self, "saved")
       end
     end
 
