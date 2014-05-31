@@ -65,6 +65,13 @@ module GridPatternEditor
         index += 1
         index %= TEXTS.size
         clicked_cell.set_image_from_text(TEXTS[index])
+      when Gosu::MsRight
+        clicked_cell = @board.click
+        return unless clicked_cell
+        index = TEXTS.index(clicked_cell.text)
+        index -= 1
+        index %= TEXTS.size
+        clicked_cell.set_image_from_text(TEXTS[index])
       when Gosu::KbEnter, Gosu::KbReturn
         puts(@board.to_s)
       when Gosu::KbR
