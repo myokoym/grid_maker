@@ -18,12 +18,12 @@ module GridPatternEditor
       @font_size = @height / 18
       @font = Gosu::Font.new(@window, Gosu.default_font_name, @font_size)
       create_save_button
+      create_text_witn_images
     end
 
     def draw
       draw_background
       draw_size_info
-      draw_text_of_image
       @cells.each do |cell|
         cell.draw
       end
@@ -53,21 +53,19 @@ module GridPatternEditor
                  1.0, 1.0, Gosu::Color::BLACK)
     end
 
-    def draw_text_of_image
+    def create_text_witn_images
       x = @x + @font_size * 0.1
-      y = @y + @font_size * 3
       @window.images.each_with_index do |entry, i|
+        y = @y + @font_size * 3 + @font_size * (i + 1)
+        width = @width * 0.45
+        height = @font_size
         text, image = *entry
-        image.draw(x,
-                   y + @font_size * (i + 1),
-                   ZOrder::Image,
-                   @font_size.to_f / image.width,
-                   @font_size.to_f / image.height)
-        @font.draw(": #{text}",
-                   x + @font_size,
-                   y + @font_size * (i + 1),
-                   ZOrder::Image,
-                   1.0, 1.0, Gosu::Color::BLACK)
+        cell = Button::TextWithImage.new(@window,
+                                         x, y,
+                                         width, height,
+                                         text,
+                                         image)
+        @cells << cell
       end
     end
 
