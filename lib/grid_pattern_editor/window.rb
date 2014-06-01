@@ -52,7 +52,7 @@ module GridPatternEditor
 
     def button_down(id)
       case id
-      when Gosu::MsLeft
+      when Gosu::MsLeft, Gosu::GpButton0
         clicked_cell = @control_panel.clicked_cell
         if clicked_cell
           clicked_cell.run
@@ -60,11 +60,11 @@ module GridPatternEditor
         clicked_cell = @board.clicked_cell
         return unless clicked_cell
         update_cell(clicked_cell)
-      when Gosu::MsRight
+      when Gosu::MsRight, Gosu::GpButton1
         clicked_cell = @board.clicked_cell
         return unless clicked_cell
         update_cell(clicked_cell)
-      when Gosu::KbEnter, Gosu::KbReturn
+      when Gosu::KbEnter, Gosu::KbReturn, Gosu::GpButton2
         puts(@board.to_s)
       when Gosu::KbEscape
         close
