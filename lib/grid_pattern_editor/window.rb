@@ -42,6 +42,10 @@ module GridPatternEditor
         @message.update
         @message = nil if @message.limit && @message.limit < 0
       end
+      if button_down?(Gosu::MsRight) || button_down?(Gosu::GpButton1)
+        clicked_cell = @board.clicked_cell
+        update_cell(clicked_cell) if clicked_cell
+      end
     end
 
     def draw
@@ -57,9 +61,6 @@ module GridPatternEditor
         if clicked_cell
           clicked_cell.run
         end
-        clicked_cell = @board.clicked_cell
-        update_cell(clicked_cell) if clicked_cell
-      when Gosu::MsRight, Gosu::GpButton1
         clicked_cell = @board.clicked_cell
         update_cell(clicked_cell) if clicked_cell
       when Gosu::KbEnter, Gosu::KbReturn, Gosu::GpButton2
