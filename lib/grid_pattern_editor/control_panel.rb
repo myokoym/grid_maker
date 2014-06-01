@@ -27,6 +27,7 @@ module GridPatternEditor
       @cells.each do |cell|
         cell.draw
       end
+      draw_current_text_with_image
     end
 
     def clicked_cell
@@ -50,6 +51,30 @@ module GridPatternEditor
     def draw_size_info
       @font.draw("#{@window.n_columns} * #{@window.n_rows}",
                  @x * 1.0, @y * 1.0, ZOrder::Image,
+                 1.0, 1.0, Gosu::Color::BLACK)
+    end
+
+    def draw_current_text_with_image
+      x = @x + @font_size * 0.1
+      y = @y + @font_size * 2
+      if @window.current_text
+        draw_current_text(@window.current_text, x, y)
+        image = @window.images[@window.current_text]
+        image.draw(x + @font_size * 2.5,
+                   y,
+                   ZOrder::Image,
+                   @font_size.to_f / image.width,
+                   @font_size.to_f / image.height)
+      else
+        draw_current_text(@window.default_text, x, y)
+      end
+    end
+
+    def draw_current_text(text, x, y)
+      @font.draw("set: #{text}",
+                 x,
+                 y,
+                 ZOrder::Image,
                  1.0, 1.0, Gosu::Color::BLACK)
     end
 

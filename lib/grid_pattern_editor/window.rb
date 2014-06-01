@@ -11,12 +11,15 @@ module GridPatternEditor
     attr_reader :n_columns, :n_rows
     attr_reader :default_text
 
+    attr_accessor :current_text
+
     def initialize(file_path=nil, options={})
       width     = options[:width]   || 800
       height    = options[:height]  || 600
       n_columns = options[:columns] || 24
       n_rows    = options[:rows]    || 32
       @default_text = options[:default_text] || "0"
+      @current_text = nil
       super(width, height, false)
       description = file_path || "not set a file"
       self.caption = "Grid Pattern Editor - #{description}"
@@ -133,11 +136,11 @@ module GridPatternEditor
     end
 
     def update_cell(clicked_cell, diff)
-      index = @texts.index(clicked_cell.text)
-      raise "Error: Invalid cell text. Please confirm default text." unless index
-      index += diff
-      index %= @texts.size
-      text = @texts[index]
+      if @current_text
+        text = @current_text
+      else
+        text = @default_text
+      end
       clicked_cell.set_image_from_text(text)
     end
   end

@@ -36,6 +36,11 @@ module GridPatternEditor
       end
 
       def run
+        if @window.current_text == @text
+          @window.current_text = nil
+        else
+          @window.current_text = @text
+        end
       end
 
       def draw
