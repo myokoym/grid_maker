@@ -17,7 +17,7 @@ module GridPatternEditor
       @cells = []
       @font_size = @height / 18
       @font = Gosu::Font.new(@window, Gosu.default_font_name, @font_size)
-      create_cells
+      create_save_button
     end
 
     def draw
@@ -71,7 +71,7 @@ module GridPatternEditor
       end
     end
 
-    def create_cells
+    def create_save_button
       x = @x * 1.02
       y = @window.height * 0.9
       width = @width * 0.8
