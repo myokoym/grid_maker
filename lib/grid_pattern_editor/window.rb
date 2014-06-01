@@ -66,8 +66,6 @@ module GridPatternEditor
         update_cell(clicked_cell)
       when Gosu::KbEnter, Gosu::KbReturn
         puts(@board.to_s)
-      when Gosu::KbR
-        @board.reset
       when Gosu::KbEscape
         close
       end

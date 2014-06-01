@@ -37,13 +37,6 @@ module GridPatternEditor
       nil
     end
 
-    def reset
-      @cells = []
-      create_cells
-      @cell_hash = {}
-      @cells.each {|cell| cell.close }
-    end
-
     def to_s
       lines = 0.upto(@n_rows - 1).collect do |y|
         line = 0.upto(@n_columns - 1).collect do |x|
