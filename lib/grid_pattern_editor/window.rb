@@ -59,11 +59,11 @@ module GridPatternEditor
         end
         clicked_cell = @board.clicked_cell
         return unless clicked_cell
-        update_cell(clicked_cell, 1)
+        update_cell(clicked_cell)
       when Gosu::MsRight
         clicked_cell = @board.clicked_cell
         return unless clicked_cell
-        update_cell(clicked_cell, -1)
+        update_cell(clicked_cell)
       when Gosu::KbEnter, Gosu::KbReturn
         puts(@board.to_s)
       when Gosu::KbR
@@ -135,7 +135,7 @@ module GridPatternEditor
       File.join(base_dir, "media")
     end
 
-    def update_cell(clicked_cell, diff)
+    def update_cell(clicked_cell)
       if @current_text
         text = @current_text
       else
