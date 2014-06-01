@@ -116,7 +116,7 @@ module GridPatternEditor
     private
     def init_texts
       @texts = [@default_text]
-      Dir.glob("#{images_dir}/*") do |path|
+      Dir.glob("#{images_dir}/*").sort.each do |path|
         @texts << File.basename(path)[0]
       end
     end
