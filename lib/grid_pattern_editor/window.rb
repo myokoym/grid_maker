@@ -56,19 +56,11 @@ module GridPatternEditor
         end
         clicked_cell = @board.clicked_cell
         return unless clicked_cell
-        index = @texts.index(clicked_cell.text)
-        raise "Error: Invalid cell text. Please confirm default text." unless index
-        index += 1
-        index %= @texts.size
-        clicked_cell.set_image_from_text(@texts[index])
+        update_cell(clicked_cell, 1)
       when Gosu::MsRight
         clicked_cell = @board.clicked_cell
         return unless clicked_cell
-        index = @texts.index(clicked_cell.text)
-        raise "Error: Invalid cell text. Please confirm default text." unless index
-        index -= 1
-        index %= @texts.size
-        clicked_cell.set_image_from_text(@texts[index])
+        update_cell(clicked_cell, -1)
       when Gosu::KbEnter, Gosu::KbReturn
         puts(@board.to_s)
       when Gosu::KbR
@@ -138,6 +130,14 @@ module GridPatternEditor
     def media_dir
       base_dir = File.expand_path(File.join(__FILE__, "..", "..", ".."))
       File.join(base_dir, "media")
+    end
+
+    def update_cell(clicked_cell, diff)
+        index = @texts.index(clicked_cell.text)
+        raise "Error: Invalid cell text. Please confirm default text." unless index
+        index += diff
+        index %= @texts.size
+        clicked_cell.set_image_from_text(@texts[index])
     end
   end
 end
