@@ -58,12 +58,10 @@ module GridPatternEditor
           clicked_cell.run
         end
         clicked_cell = @board.clicked_cell
-        return unless clicked_cell
-        update_cell(clicked_cell)
+        update_cell(clicked_cell) if clicked_cell
       when Gosu::MsRight, Gosu::GpButton1
         clicked_cell = @board.clicked_cell
-        return unless clicked_cell
-        update_cell(clicked_cell)
+        update_cell(clicked_cell) if clicked_cell
       when Gosu::KbEnter, Gosu::KbReturn, Gosu::GpButton2
         puts(@board.to_s)
       when Gosu::KbEscape
