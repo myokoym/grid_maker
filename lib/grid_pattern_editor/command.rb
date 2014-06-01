@@ -50,6 +50,12 @@ Warning: not set an export/import file.
           options[:rows] = rows
         end
 
+        parser.on("--default-text=X",
+                  String,
+                  "Default text as one character") do |char|
+          options[:default_text] = char
+        end
+
         parser.parse!(arguments)
 
         options

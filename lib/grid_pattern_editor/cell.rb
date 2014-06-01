@@ -6,8 +6,6 @@ module GridPatternEditor
   class Cell
     include Base
 
-    DEFAULT_TEXT = "0"
-
     attr_reader :x, :y
     attr_reader :text
 
@@ -26,7 +24,7 @@ module GridPatternEditor
       @y1 = y_margin + @y * @height
       @x2 = @x1 + @width
       @y2 = @y1 + @height
-      @text = text || DEFAULT_TEXT
+      @text = text || @window.default_text
       @frame_color = Gosu::Color::BLACK
       @background_color = Gosu::Color::WHITE
       set_image_from_text(@text)
@@ -42,7 +40,7 @@ module GridPatternEditor
     end
 
     def remove
-      @text = DEFAULT_TEXT
+      @text = @window.default_text
     end
 
     def pointing?(x, y)

@@ -7,23 +7,20 @@ require "grid_pattern_editor/message"
 
 module GridPatternEditor
   class Window < Gosu::Window
-    TEXTS = [
-      "0",
-      "1",
-      "2",
-    ]
-
     attr_reader :images, :texts
     attr_reader :n_columns, :n_rows
+    attr_reader :default_text
 
     def initialize(file_path=nil, options={})
       width     = options[:width]   || 800
       height    = options[:height]  || 600
       n_columns = options[:columns] || 24
       n_rows    = options[:rows]    || 32
+      @default_text = options[:default_text] || "0"
       super(width, height, false)
       description = file_path || "not set a file"
       self.caption = "Grid Pattern Editor - #{description}"
+      init_texts
       init_images
       board_width = width * 0.8
       control_panel_width = width * 0.2
@@ -59,17 +56,19 @@ module GridPatternEditor
         end
         clicked_cell = @board.click
         return unless clicked_cell
-        index = TEXTS.index(clicked_cell.text)
+        index = @texts.index(clicked_cell.text)
+        raise "Error: Invalid cell text. Please confirm default text." unless index
         index += 1
-        index %= TEXTS.size
-        clicked_cell.set_image_from_text(TEXTS[index])
+        index %= @texts.size
+        clicked_cell.set_image_from_text(@texts[index])
       when Gosu::MsRight
         clicked_cell = @board.click
         return unless clicked_cell
-        index = TEXTS.index(clicked_cell.text)
+        index = @texts.index(clicked_cell.text)
+        raise "Error: Invalid cell text. Please confirm default text." unless index
         index -= 1
-        index %= TEXTS.size
-        clicked_cell.set_image_from_text(TEXTS[index])
+        index %= @texts.size
+        clicked_cell.set_image_from_text(@texts[index])
       when Gosu::KbEnter, Gosu::KbReturn
         puts(@board.to_s)
       when Gosu::KbR
@@ -115,9 +114,16 @@ module GridPatternEditor
     end
 
     private
+    def init_texts
+      @texts = [@default_text]
+      Dir.glob("#{images_dir}/*") do |path|
+        @texts << File.basename(path)[0]
+      end
+    end
+
     def init_images
       @images = {}
-      TEXTS.each do |text|
+      @texts.each do |text|
         image_path = File.join(images_dir, "#{text}.png")
         next unless File.exist?(image_path)
         image = Gosu::Image.new(self, image_path, false)
