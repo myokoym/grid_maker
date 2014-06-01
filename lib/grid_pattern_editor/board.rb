@@ -28,7 +28,7 @@ module GridPatternEditor
       end
     end
 
-    def click
+    def clicked_cell
       @cells.each do |cell|
         if cell.pointing?(@window.mouse_x, @window.mouse_y)
           return cell

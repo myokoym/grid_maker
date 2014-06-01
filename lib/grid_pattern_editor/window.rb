@@ -50,11 +50,11 @@ module GridPatternEditor
     def button_down(id)
       case id
       when Gosu::MsLeft
-        clicked_cell = @control_panel.click
+        clicked_cell = @control_panel.clicked_cell
         if clicked_cell
           clicked_cell.run
         end
-        clicked_cell = @board.click
+        clicked_cell = @board.clicked_cell
         return unless clicked_cell
         index = @texts.index(clicked_cell.text)
         raise "Error: Invalid cell text. Please confirm default text." unless index
@@ -62,7 +62,7 @@ module GridPatternEditor
         index %= @texts.size
         clicked_cell.set_image_from_text(@texts[index])
       when Gosu::MsRight
-        clicked_cell = @board.click
+        clicked_cell = @board.clicked_cell
         return unless clicked_cell
         index = @texts.index(clicked_cell.text)
         raise "Error: Invalid cell text. Please confirm default text." unless index
