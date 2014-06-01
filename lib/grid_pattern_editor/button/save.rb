@@ -4,7 +4,7 @@ require "grid_pattern_editor/z_order"
 
 module GridPatternEditor
   module Button
-    class Save < Cell
+    class Save
       include Base
 
       attr_reader :x, :y
