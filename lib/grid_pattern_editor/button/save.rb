@@ -1,11 +1,13 @@
 require "gosu"
 require "grid_pattern_editor/base"
 require "grid_pattern_editor/z_order"
+require "grid_pattern_editor/clickable"
 
 module GridPatternEditor
   module Button
     class Save
       include Base
+      include Clickable
 
       attr_reader :x, :y
 
@@ -34,11 +36,6 @@ module GridPatternEditor
                                        :center)
         @image_factor_x = 1.0 * @width / @image.width
         @image_factor_y = 1.0 * @height / @image.height
-      end
-
-      def pointing?(x, y)
-        @x1 < x && @x2 > x &&
-        @y1 < y && @y2 > y
       end
 
       def run

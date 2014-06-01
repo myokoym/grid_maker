@@ -1,10 +1,12 @@
 require "gosu"
 require "grid_pattern_editor/base"
 require "grid_pattern_editor/z_order"
+require "grid_pattern_editor/clickable"
 
 module GridPatternEditor
   class Cell
     include Base
+    include Clickable
 
     attr_reader :x, :y
     attr_reader :text
@@ -41,11 +43,6 @@ module GridPatternEditor
 
     def remove
       @text = @window.default_text
-    end
-
-    def pointing?(x, y)
-      @x1 < x && @x2 > x &&
-      @y1 < y && @y2 > y
     end
 
     def draw
