@@ -133,11 +133,11 @@ module GridPatternEditor
     end
 
     def update_cell(clicked_cell, diff)
-        index = @texts.index(clicked_cell.text)
-        raise "Error: Invalid cell text. Please confirm default text." unless index
-        index += diff
-        index %= @texts.size
-        clicked_cell.set_image_from_text(@texts[index])
+      index = @texts.index(clicked_cell.text)
+      raise "Error: Invalid cell text. Please confirm default text." unless index
+      index += diff
+      index %= @texts.size
+      clicked_cell.set_image_from_text(@texts[index])
     end
   end
 end
