@@ -79,9 +79,9 @@ module GridPatternEditor
     end
 
     def create_text_witn_images
-      x = @x + @font_size * 0.1
       @window.images.each_with_index do |entry, i|
-        y = @y + @font_size * 3 + @font_size * (i + 1)
+        x = @x + @font_size * 0.1 + @width * 0.45 * (i / 10)
+        y = @y + @font_size * 3 + @font_size * ((i % 10) + 1)
         width = @width * 0.45
         height = @font_size
         text, image = *entry
