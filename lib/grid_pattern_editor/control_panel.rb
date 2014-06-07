@@ -59,10 +59,11 @@ module GridPatternEditor
     def draw_scroll_position
       x = @x
       y = @y + @font_size * 1
-      current = @window.n_rows + @window.scroll_position
-      @font.draw("#{current} / #{@window.data.size}",
+      top    = @window.scroll_position + 1
+      bottom = @window.scroll_position + @window.n_rows
+      @font.draw("#{top}-#{bottom} / #{@window.data.size}",
                  x, y, ZOrder::Image,
-                 1.0, 1.0, Gosu::Color::BLACK)
+                 0.8, 0.8, Gosu::Color::BLACK)
     end
 
     def draw_navigation_message
