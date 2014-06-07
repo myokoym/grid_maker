@@ -68,7 +68,7 @@ module GridPatternEditor
     def draw_navigation_message
       x = @x
       y = @y + @font_size * 3.1
-      @font.draw("<Please choice>",
+      @font.draw("Please select",
                  x, y, ZOrder::Image,
                  0.8, 0.8, Gosu::Color::BLACK)
     end
