@@ -40,7 +40,7 @@ module GridPatternEditor
     def to_s
       lines = 0.upto(@n_rows - 1).collect do |y|
         line = 0.upto(@n_columns - 1).collect do |x|
-          @cell_hash["#{y}#{x}"].text
+          @cell_hash["#{y}-#{x}"].text
         end
         line.join
       end
@@ -72,7 +72,7 @@ module GridPatternEditor
                           y_margin / 2,
                           text)
           @cells << cell
-          @cell_hash["#{y}#{x}"] = cell
+          @cell_hash["#{y}-#{x}"] = cell
         end
       end
     end
