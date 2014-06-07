@@ -25,6 +25,7 @@ module GridPatternEditor
       draw_background
       draw_size_info
       draw_scroll_position
+      draw_navigation_message
       @cells.each do |cell|
         cell.draw
       end
@@ -63,6 +64,15 @@ module GridPatternEditor
                  x, y, ZOrder::Image,
                  1.0, 1.0, Gosu::Color::BLACK)
     end
+
+    def draw_navigation_message
+      x = @x
+      y = @y + @font_size * 3.1
+      @font.draw("<Please choice>",
+                 x, y, ZOrder::Image,
+                 0.8, 0.8, Gosu::Color::BLACK)
+    end
+
 
     def draw_current_text_with_image
       x = @x + @font_size * 0.1
