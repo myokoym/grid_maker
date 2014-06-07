@@ -24,6 +24,7 @@ module GridPatternEditor
     def draw
       draw_background
       draw_size_info
+      draw_scroll_position
       @cells.each do |cell|
         cell.draw
       end
@@ -51,6 +52,15 @@ module GridPatternEditor
     def draw_size_info
       @font.draw("#{@window.n_columns} * #{@window.n_rows}",
                  @x * 1.0, @y * 1.0, ZOrder::Image,
+                 1.0, 1.0, Gosu::Color::BLACK)
+    end
+
+    def draw_scroll_position
+      x = @x
+      y = @y + @font_size * 1
+      current = @window.n_rows + @window.scroll_position
+      @font.draw("#{current} / #{@window.data.size}",
+                 x, y, ZOrder::Image,
                  1.0, 1.0, Gosu::Color::BLACK)
     end
 

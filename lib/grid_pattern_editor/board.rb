@@ -28,23 +28,35 @@ module GridPatternEditor
       end
     end
 
-    def clicked_cell
+    def click(text)
       @cells.each do |cell|
         if cell.pointing?(@window.mouse_x, @window.mouse_y)
-          return cell
+          cell.set_image_from_text(text)
+          y = cell.y + @window.scroll_position
+          @window.data[y][cell.x] = text
         end
       end
       nil
     end
 
     def to_s
-      lines = 0.upto(@n_rows - 1).collect do |y|
-        line = 0.upto(@n_columns - 1).collect do |x|
-          @cell_hash["#{y}-#{x}"].text
-        end
-        line.join
+      lines = @window.data.collect do |line|
+        line.join.chomp
       end
       lines.join("\n")
+    end
+
+    def scroll
+      data = @window.data
+      scroll_position = @window.scroll_position
+      0.upto(@n_rows - 1) do |y|
+        0.upto(@n_columns - 1) do |x|
+          data_y = y + scroll_position
+          text = data[data_y][x]
+          cell = @cell_hash["#{y}-#{x}"]
+          cell.set_image_from_text(text)
+        end
+      end
     end
 
     private

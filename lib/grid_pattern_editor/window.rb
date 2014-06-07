@@ -10,6 +10,8 @@ module GridPatternEditor
     attr_reader :images, :texts
     attr_reader :n_columns, :n_rows
     attr_reader :default_text
+    attr_reader :scroll_position
+    attr_reader :data
 
     attr_accessor :current_text
 
@@ -30,6 +32,7 @@ module GridPatternEditor
       @file_path = file_path
       @n_columns = n_columns
       @n_rows = n_rows
+      @scroll_position = 0
       @board = Board.new(self, board_width, height, file_path)
       @control_panel = ControlPanel.new(self,
                                         board_width, 0,
@@ -43,8 +46,7 @@ module GridPatternEditor
         @message = nil if @message.limit && @message.limit < 0
       end
       if button_down?(Gosu::MsRight) || button_down?(Gosu::GpButton1)
-        clicked_cell = @board.clicked_cell
-        update_cell(clicked_cell) if clicked_cell
+        update_board
       end
     end
 
@@ -61,10 +63,17 @@ module GridPatternEditor
         if clicked_cell
           clicked_cell.run
         end
-        clicked_cell = @board.clicked_cell
-        update_cell(clicked_cell) if clicked_cell
+        update_board
       when Gosu::KbEnter, Gosu::KbReturn, Gosu::GpButton2
         puts(@board.to_s)
+      when Gosu::KbDown
+        scroll(1)
+      when Gosu::KbPageDown
+        scroll(@n_rows)
+      when Gosu::KbUp
+        scroll(-1)
+      when Gosu::KbPageUp
+        scroll(-@n_rows)
       when Gosu::KbEscape
         close
       end
@@ -102,7 +111,7 @@ module GridPatternEditor
           $stderr.puts("Warning: can't load file: #{@file_path}")
         end
       end
-      data
+      @data = data
     end
 
     private
@@ -132,13 +141,18 @@ module GridPatternEditor
       File.join(base_dir, "media")
     end
 
-    def update_cell(clicked_cell)
-      if @current_text
-        text = @current_text
-      else
-        text = @default_text
+    def update_board
+      @board.click(@current_text || @default_text)
+    end
+
+    def scroll(movement)
+      @scroll_position += movement
+      if @scroll_position < 0
+        @scroll_position = 0
+      elsif @scroll_position > (@data.size - @n_rows)
+        @scroll_position = (@data.size - @n_rows)
       end
-      clicked_cell.set_image_from_text(text)
+      @board.scroll
     end
   end
 end
