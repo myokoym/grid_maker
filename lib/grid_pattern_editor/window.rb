@@ -68,9 +68,9 @@ module GridPatternEditor
         puts(@board.to_s)
       when Gosu::KbDown, Gosu::MsWheelDown, Gosu::GpDown
         scroll(1)
-      when Gosu::KbPageDown, Gosu::MsWheelUp, Gosu::GpUp
+      when Gosu::KbPageDown
         scroll(@n_rows)
-      when Gosu::KbUp
+      when Gosu::KbUp, Gosu::MsWheelUp, Gosu::GpUp
         scroll(-1)
       when Gosu::KbPageUp
         scroll(-@n_rows)
