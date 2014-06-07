@@ -49,18 +49,18 @@ module GridPatternEditor
                   @x1, @y1,
                   @x2, @y2,
                   @background_color,
-                  ZOrder::Cell)
+                  ZOrder::Cover)
       draw_frame(@window,
                  @x1, @y1,
                  @x2, @y2,
                  @frame_color,
-                 ZOrder::Frame)
+                 ZOrder::Cover)
     end
 
     def draw_text
       x = @x1
       y = @y1
-      z = ZOrder::Image
+      z = ZOrder::Message
       color = Gosu::Color::WHITE
       @image.draw(x, y, z,
                   @image_factor_x, @image_factor_y,
