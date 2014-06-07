@@ -29,14 +29,16 @@ module GridPatternEditor
     end
 
     def click(text)
+      handled = false
       @cells.each do |cell|
         if cell.pointing?(@window.mouse_x, @window.mouse_y)
           cell.set_image_from_text(text)
           y = cell.y + @window.scroll_position
           @window.data[y][cell.x] = text
+          handled = true
         end
       end
-      nil
+      handled
     end
 
     def to_s
