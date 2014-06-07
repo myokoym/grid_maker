@@ -110,6 +110,12 @@ module GridPatternEditor
         rescue
           $stderr.puts("Warning: can't load file: #{@file_path}")
         end
+      else
+        data = Array.new(@n_rows) do
+          Array.new(@n_columns) do
+            @default_text
+          end
+        end
       end
       @data = data
     end
