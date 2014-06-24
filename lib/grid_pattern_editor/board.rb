@@ -49,26 +49,15 @@ module GridPatternEditor
       lines.join("\n")
     end
 
-    def scroll_x
+    def scroll
       data = @window.data
-      scroll_position = @window.scroll_position_x
+      scroll_position_x = @window.scroll_position_x
+      scroll_position_y = @window.scroll_position_y
       0.upto(@n_rows - 1) do |y|
         0.upto(@n_columns - 1) do |x|
-          data_x = x + scroll_position
-          text = data[y][data_x]
-          cell = @cell_hash["#{y}-#{x}"]
-          cell.set_image_from_text(text)
-        end
-      end
-    end
-
-    def scroll_y
-      data = @window.data
-      scroll_position = @window.scroll_position_y
-      0.upto(@n_rows - 1) do |y|
-        0.upto(@n_columns - 1) do |x|
-          data_y = y + scroll_position
-          text = data[data_y][x]
+          data_x = x + scroll_position_x
+          data_y = y + scroll_position_y
+          text = data[data_y][data_x]
           cell = @cell_hash["#{y}-#{x}"]
           cell.set_image_from_text(text)
         end

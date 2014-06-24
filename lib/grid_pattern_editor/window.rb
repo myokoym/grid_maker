@@ -172,7 +172,7 @@ module GridPatternEditor
       elsif @scroll_position_x > (@data.size - @n_columns)
         @scroll_position_x = (@data.size - @n_columns)
       end
-      @board.scroll_x
+      @board.scroll
     end
 
     def scroll_y(movement)
@@ -182,7 +182,7 @@ module GridPatternEditor
       elsif @scroll_position_y > (@data.size - @n_rows)
         @scroll_position_y = (@data.size - @n_rows)
       end
-      @board.scroll_y
+      @board.scroll
     end
   end
 end
