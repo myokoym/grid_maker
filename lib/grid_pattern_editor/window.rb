@@ -49,6 +49,14 @@ module GridPatternEditor
       end
       if button_down?(Gosu::MsRight) || button_down?(Gosu::GpButton1)
         update_board
+      elsif button_down?(Gosu::KbH)
+        scroll_x(-1)
+      elsif button_down?(Gosu::KbL)
+        scroll_x(1)
+      elsif button_down?(Gosu::KbK)
+        scroll_y(-1)
+      elsif button_down?(Gosu::KbJ)
+        scroll_y(1)
       end
     end
 
