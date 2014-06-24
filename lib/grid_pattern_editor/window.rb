@@ -23,7 +23,9 @@ module GridPatternEditor
       n_rows    = options[:rows]    || 32
       @default_text = options[:default_text] || "0"
       @current_text = nil
-      super(width, height, false)
+      fps = 30
+      update_interval = 1000 / fps
+      super(width, height, false, update_interval)
       description = file_path || "not set a file"
       self.caption = "Grid Pattern Editor - #{description}"
       init_texts
