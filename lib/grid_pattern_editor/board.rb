@@ -33,8 +33,9 @@ module GridPatternEditor
       @cells.each do |cell|
         if cell.pointing?(@window.mouse_x, @window.mouse_y)
           cell.set_image_from_text(text)
-          y = cell.y + @window.scroll_position
-          @window.data[y][cell.x] = text
+          x = cell.x + @window.scroll_position_x
+          y = cell.y + @window.scroll_position_y
+          @window.data[y][x] = text
           handled = true
         end
       end
@@ -48,9 +49,22 @@ module GridPatternEditor
       lines.join("\n")
     end
 
-    def scroll
+    def scroll_x
       data = @window.data
-      scroll_position = @window.scroll_position
+      scroll_position = @window.scroll_position_x
+      0.upto(@n_rows - 1) do |y|
+        0.upto(@n_columns - 1) do |x|
+          data_x = x + scroll_position
+          text = data[y][data_x]
+          cell = @cell_hash["#{y}-#{x}"]
+          cell.set_image_from_text(text)
+        end
+      end
+    end
+
+    def scroll_y
+      data = @window.data
+      scroll_position = @window.scroll_position_y
       0.upto(@n_rows - 1) do |y|
         0.upto(@n_columns - 1) do |x|
           data_y = y + scroll_position

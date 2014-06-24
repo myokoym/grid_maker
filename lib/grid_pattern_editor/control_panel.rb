@@ -23,8 +23,8 @@ module GridPatternEditor
 
     def draw
       draw_background
-      draw_size_info
-      draw_scroll_position
+      draw_scroll_position_x
+      draw_scroll_position_y
       draw_navigation_message
       @cells.each do |cell|
         cell.draw
@@ -50,18 +50,22 @@ module GridPatternEditor
                   ZOrder::Background)
     end
 
-    def draw_size_info
-      @font.draw("#{@window.n_columns} * #{@window.n_rows}",
-                 @x * 1.0, @y * 1.0, ZOrder::Image,
-                 1.0, 1.0, Gosu::Color::BLACK)
+    def draw_scroll_position_x
+      x = @x
+      y = @y
+      top    = @window.scroll_position_x + 1
+      bottom = @window.scroll_position_x + @window.n_columns
+      @font.draw(" x: #{top}-#{bottom} / #{@window.data.first.size}",
+                 x, y, ZOrder::Image,
+                 0.8, 0.8, Gosu::Color::BLACK)
     end
 
-    def draw_scroll_position
+    def draw_scroll_position_y
       x = @x
       y = @y + @font_size * 1
-      top    = @window.scroll_position + 1
-      bottom = @window.scroll_position + @window.n_rows
-      @font.draw("#{top}-#{bottom} / #{@window.data.size}",
+      top    = @window.scroll_position_y + 1
+      bottom = @window.scroll_position_y + @window.n_rows
+      @font.draw(" y: #{top}-#{bottom} / #{@window.data.size}",
                  x, y, ZOrder::Image,
                  0.8, 0.8, Gosu::Color::BLACK)
     end

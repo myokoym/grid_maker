@@ -10,7 +10,8 @@ module GridPatternEditor
     attr_reader :images, :texts
     attr_reader :n_columns, :n_rows
     attr_reader :default_text
-    attr_reader :scroll_position
+    attr_reader :scroll_position_x
+    attr_reader :scroll_position_y
     attr_reader :data
 
     attr_accessor :current_text
@@ -32,7 +33,8 @@ module GridPatternEditor
       @file_path = file_path
       @n_columns = n_columns
       @n_rows = n_rows
-      @scroll_position = 0
+      @scroll_position_x = 0
+      @scroll_position_y = 0
       @board = Board.new(self, board_width, height, file_path)
       @control_panel = ControlPanel.new(self,
                                         board_width, 0,
@@ -67,13 +69,17 @@ module GridPatternEditor
       when Gosu::KbEnter, Gosu::KbReturn, Gosu::GpButton2
         puts(@board.to_s)
       when Gosu::KbDown, Gosu::MsWheelDown, Gosu::GpDown
-        scroll(1)
+        scroll_y(1)
       when Gosu::KbPageDown
-        scroll(@n_rows)
+        scroll_y(@n_rows)
       when Gosu::KbUp, Gosu::MsWheelUp, Gosu::GpUp
-        scroll(-1)
+        scroll_y(-1)
       when Gosu::KbPageUp
-        scroll(-@n_rows)
+        scroll_y(-@n_rows)
+      when Gosu::KbLeft, Gosu::GpLeft
+        scroll_x(-1)
+      when Gosu::KbRight, Gosu::GpRight
+        scroll_x(1)
       when Gosu::KbEscape
         close
       end
@@ -151,14 +157,24 @@ module GridPatternEditor
       @board.click(@current_text || @default_text)
     end
 
-    def scroll(movement)
-      @scroll_position += movement
-      if @scroll_position < 0
-        @scroll_position = 0
-      elsif @scroll_position > (@data.size - @n_rows)
-        @scroll_position = (@data.size - @n_rows)
+    def scroll_x(movement)
+      @scroll_position_x += movement
+      if @scroll_position_x < 0
+        @scroll_position_x = 0
+      elsif @scroll_position_x > (@data.size - @n_columns)
+        @scroll_position_x = (@data.size - @n_columns)
       end
-      @board.scroll
+      @board.scroll_x
+    end
+
+    def scroll_y(movement)
+      @scroll_position_y += movement
+      if @scroll_position_y < 0
+        @scroll_position_y = 0
+      elsif @scroll_position_y > (@data.size - @n_rows)
+        @scroll_position_y = (@data.size - @n_rows)
+      end
+      @board.scroll_y
     end
   end
 end
