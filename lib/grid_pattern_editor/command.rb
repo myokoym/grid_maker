@@ -56,6 +56,19 @@ Warning: not set an export/import file.
           options[:default_text] = char
         end
 
+        parser.on("--generate=FILENAME",
+                  String,
+                  "Generate an initial file") do |filename|
+          n_columns = options[:columns] || 64
+          n_rows = options[:rows] || 64
+          File.open(filename, "w") do |file|
+            n_rows.times do
+              file.puts("0" * n_columns)
+            end
+          end
+          exit(true)
+        end
+
         parser.parse!(arguments)
 
         options
